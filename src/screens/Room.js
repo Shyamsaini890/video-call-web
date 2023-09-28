@@ -120,9 +120,9 @@ const RoomPage = () => {
     <div className=" flex flex-col justify-center items-center">
       <h1 className=" text-3xl font-bold">Room Page</h1>
       <h4>{remoteSocketId ? "Connected" : "No one in room"}</h4>
-      {myStream && <button onClick={sendStreams}>Send Stream</button>}
-      {remoteSocketId && <button onClick={handleCallUser}>CALL</button>}
-      {myStream && (
+      {myStream ? <button onClick={sendStreams}>Send Stream</button> : <></>}
+      {remoteSocketId ? <button onClick={handleCallUser}>CALL</button> : <></>}
+      {myStream ? (
         <>
           <h1>My Stream</h1>
           <ReactPlayer
@@ -133,8 +133,10 @@ const RoomPage = () => {
             url={myStream}
           />
         </>
+      ) : (
+        <></>
       )}
-      {remoteStream && (
+      {remoteStream ? (
         <>
           <h1>Remote Stream</h1>
           <ReactPlayer
@@ -145,6 +147,8 @@ const RoomPage = () => {
             url={remoteStream}
           />
         </>
+      ) : (
+        <></>
       )}
     </div>
   );
