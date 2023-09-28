@@ -10,7 +10,7 @@ export const useSocket = () => {
 };
 
 export const SocketProvider = (props) => {
-  const socket = useMemo(() => io("wss://shyam001.glitch.me/"), []);
+  const socket = useMemo(() => io("wss://shyam00112.glitch.me/"), []);
 
   socket.on("connect_error", (error) => {
     console.error("Socket connection error:", error);
