@@ -15,19 +15,24 @@ const RoomPage = () => {
   }, []);
 
   const handleCallUser = useCallback(async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      audio: true,
-      video: true,
-    });
-    const offer = await peer.getOffer();
-    socket.emit("user:call", { to: remoteSocketId, offer });
-    setMyStream(stream);
+    try {
+      console.log(navigator);
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: true,
+      });
+      const offer = await peer.getOffer();
+      socket.emit("user:call", { to: remoteSocketId, offer });
+      setMyStream(stream);
+    } catch (e) {
+      console.log(e);
+    }
   }, [remoteSocketId, socket]);
 
   const handleIncommingCall = useCallback(
     async ({ from, offer }) => {
       setRemoteSocketId(from);
-      const stream = await navigator.mediaDevices.getUserMedia({
+      const stream = await navigator.mediaDevices?.getUserMedia({
         audio: true,
         video: true,
       });
@@ -40,8 +45,10 @@ const RoomPage = () => {
   );
 
   const sendStreams = useCallback(() => {
-    for (const track of myStream.getTracks()) {
-      peer.peer.addTrack(track, myStream);
+    if (myStream) {
+      for (const track of myStream.getTracks()) {
+        peer.peer.addTrack(track, myStream);
+      }
     }
   }, [myStream]);
 
@@ -120,7 +127,7 @@ const RoomPage = () => {
           <h1>My Stream</h1>
           <ReactPlayer
             playing
-            muted
+            // muted
             height="100px"
             width="200px"
             url={myStream}
@@ -132,7 +139,7 @@ const RoomPage = () => {
           <h1>Remote Stream</h1>
           <ReactPlayer
             playing
-            muted
+            // muted
             height="100px"
             width="200px"
             url={remoteStream}
