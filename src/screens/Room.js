@@ -182,7 +182,6 @@ const RoomPage = () => {
       {myStream ? (
         <>
           <h1>{!fullScreenStream ? "My Stream" : "Remote Stream"}</h1>
-          !fullScreenStream ?{" "}
           <div
             onClick={() => {
               remoteStream && setFullScreenStream((prev) => !prev);
@@ -190,6 +189,7 @@ const RoomPage = () => {
           >
             {!fullScreenStream ? (
               <ReactPlayer
+                key={1}
                 playing
                 muted
                 height="300px"
@@ -198,6 +198,7 @@ const RoomPage = () => {
               />
             ) : (
               <ReactPlayer
+                key={2}
                 playing
                 muted
                 height="300px"
@@ -220,6 +221,7 @@ const RoomPage = () => {
           >
             {!fullScreenStream ? (
               <ReactPlayer
+                key={1}
                 playing
                 muted
                 height="300px"
@@ -228,6 +230,7 @@ const RoomPage = () => {
               />
             ) : (
               <ReactPlayer
+                key={2}
                 playing
                 muted
                 height="300px"
