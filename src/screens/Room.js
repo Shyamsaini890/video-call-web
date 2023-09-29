@@ -50,8 +50,8 @@ const RoomPage = () => {
         video: true,
       });
       const offer = await peer.getOffer();
-      console.log(offer);
       socket.emit("user:call", { to: remoteSocketId, offer });
+      console.log(remoteSocketId);
       setMyStream(stream);
     } catch (e) {
       console.log(e);
@@ -61,7 +61,7 @@ const RoomPage = () => {
   const handleIncommingCall = useCallback(
     async ({ from, offer }) => {
       console.log(from, offer);
-      
+
       setRemoteSocketId(from);
       const stream = await navigator.mediaDevices?.getUserMedia({
         audio: true,
