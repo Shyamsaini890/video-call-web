@@ -8,7 +8,7 @@ const RoomPage = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  const { connectedParticipants, room, myId } = location.state;
+  const { connectedParticipants, room } = location.state;
   let email = connectedParticipants[connectedParticipants.length - 1];
 
   const socket = useSocket();

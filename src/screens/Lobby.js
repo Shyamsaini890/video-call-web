@@ -21,9 +21,9 @@ const Lobby = () => {
       if (data.error) {
         return alert(data.error);
       }
-      const { connectedParticipants, room, myId } = data;
+      const { connectedParticipants, room } = data;
       navigate(`/room/${room}`, {
-        state: { connectedParticipants, room, email, myId },
+        state: { connectedParticipants, room, email },
       });
     },
     [navigate]
