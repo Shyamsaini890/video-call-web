@@ -16,6 +16,7 @@ const RoomPage = () => {
   const [myStream, setMyStream] = useState();
   const [remoteStream, setRemoteStream] = useState();
   const [participants, setParticipants] = useState(connectedParticipants);
+  const [fullScreenStream, setFullScreenStream] = useState(false);
 
   useEffect(() => {
     participants.length > 1 &&
@@ -180,13 +181,16 @@ const RoomPage = () => {
       )}
       {myStream ? (
         <>
-          <h1>My Stream</h1>
+          <h1>{!fullScreenStream ? "My Stream" : "Remote Stream"}</h1>
           <ReactPlayer
             playing
             muted
             height="300px"
             width="300px"
-            url={myStream}
+            url={fullScreenStream && remoteStream ? myStream : remoteStream}
+            onClick={() => {
+              setFullScreenStream((prev) => !prev);
+            }}
           />
         </>
       ) : (
@@ -194,14 +198,17 @@ const RoomPage = () => {
       )}
       {remoteStream ? (
         <>
-          <h1>Remote Stream</h1>
+          <h1>{fullScreenStream ? "My Stream" : "Remote Stream"}</h1>
           <ReactPlayer
             playing
-            // muted
+            muted
             height="300px"
             width="300px"
-            url={remoteStream}
+            url={fullScreenStream ? myStream : remoteStream}
             className=" max-md:w-100vw[h-w00vh]"
+            onClick={() => {
+              setFullScreenStream((prev) => !prev);
+            }}
           />
         </>
       ) : (
