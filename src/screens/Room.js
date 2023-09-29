@@ -182,16 +182,30 @@ const RoomPage = () => {
       {myStream ? (
         <>
           <h1>{!fullScreenStream ? "My Stream" : "Remote Stream"}</h1>
-          <ReactPlayer
-            playing
-            muted
-            height="300px"
-            width="300px"
-            url={!fullScreenStream ? myStream : remoteStream}
+          !fullScreenStream ?{" "}
+          <div
             onClick={() => {
-              remoteStream && setFullScreenStream(!fullScreenStream);
+              remoteStream && setFullScreenStream((prev) => !prev);
             }}
-          />
+          >
+            {!fullScreenStream ? (
+              <ReactPlayer
+                playing
+                muted
+                height="300px"
+                width="300px"
+                url={myStream}
+              />
+            ) : (
+              <ReactPlayer
+                playing
+                muted
+                height="300px"
+                width="300px"
+                url={remoteStream}
+              />
+            )}
+          </div>
         </>
       ) : (
         <></>
@@ -199,17 +213,29 @@ const RoomPage = () => {
       {remoteStream ? (
         <>
           <h1>{fullScreenStream ? "My Stream" : "Remote Stream"}</h1>
-          <ReactPlayer
-            playing
-            muted
-            height="300px"
-            width="300px"
-            url={fullScreenStream ? myStream : remoteStream}
-            className=" max-md:w-100vw[h-w00vh]"
+          <div
             onClick={() => {
-              remoteStream && setFullScreenStream(!fullScreenStream);
+              remoteStream && setFullScreenStream((prev) => !prev);
             }}
-          />
+          >
+            {!fullScreenStream ? (
+              <ReactPlayer
+                playing
+                muted
+                height="300px"
+                width="300px"
+                url={remoteStream}
+              />
+            ) : (
+              <ReactPlayer
+                playing
+                muted
+                height="300px"
+                width="300px"
+                url={myStream}
+              />
+            )}
+          </div>
         </>
       ) : (
         <></>
