@@ -204,7 +204,7 @@ const RoomPage = () => {
             muted
             height="300px"
             width="300px"
-            url={fullScreenStream ? myStream : remoteStream}
+            url={!fullScreenStream ? myStream : remoteStream}
             className=" max-md:w-100vw[h-w00vh]"
             onClick={() => {
               setFullScreenStream((prev) => !prev);
