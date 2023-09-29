@@ -189,7 +189,7 @@ const RoomPage = () => {
                 <ReactPlayer
                   key={1}
                   playing
-                  // muted
+                  muted
                   url={myStream}
                   width="100%"
                   height="100%"
@@ -235,7 +235,7 @@ const RoomPage = () => {
                   width="100%"
                   height="100%"
                   playing
-                  // muted
+                  muted
                   url={myStream}
                 />
               )}
