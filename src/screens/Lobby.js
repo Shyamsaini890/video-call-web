@@ -18,8 +18,13 @@ const Lobby = () => {
 
   const handleJoinRoom = useCallback(
     (data) => {
-      const { email, room } = data;
-      navigate(`/room/${room}`);
+      if (data.error) {
+        return alert(data.error);
+      }
+      const { connectedParticipants, room } = data;
+      navigate(`/room/${room}`, {
+        state: { connectedParticipants, room, email },
+      });
     },
     [navigate]
   );
