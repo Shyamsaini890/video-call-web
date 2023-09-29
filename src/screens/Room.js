@@ -161,7 +161,7 @@ const RoomPage = () => {
   ]);
 
   return (
-    <div className=" flex flex-col justify-center items-center">
+    <div className=" flex flex-col justify-center items-center ">
       <h1 className=" text-3xl font-bold">Room Page</h1>
       {participants.length - 1
         ? participants.map((participant, index) => {
@@ -179,71 +179,72 @@ const RoomPage = () => {
       ) : (
         <></>
       )}
-      {myStream ? (
-        <>
-          <h1>{!fullScreenStream ? "My Stream" : "Remote Stream"}</h1>
-          <div
-            onClick={() => {
-              remoteStream && setFullScreenStream((prev) => !prev);
-            }}
-          >
-            {!fullScreenStream ? (
-              <ReactPlayer
-                key={1}
-                playing
-                muted
-                height="300px"
-                width="300px"
-                url={myStream}
-              />
-            ) : (
-              <ReactPlayer
-                key={2}
-                playing
-                muted
-                height="300px"
-                width="300px"
-                url={remoteStream}
-              />
-            )}
-          </div>
-        </>
-      ) : (
-        <></>
-      )}
-      {remoteStream ? (
-        <>
-          <h1>{fullScreenStream ? "My Stream" : "Remote Stream"}</h1>
-          <div
-            onClick={() => {
-              remoteStream && setFullScreenStream((prev) => !prev);
-            }}
-          >
-            {!fullScreenStream ? (
-              <ReactPlayer
-                key={1}
-                playing
-                muted
-                height="300px"
-                width="300px"
-                url={remoteStream}
-              />
-            ) : (
-              <ReactPlayer
-                key={2}
-                playing
-                muted
-                height="300px"
-                width="300px"
-                url={myStream}
-              />
-            )}
-          </div>
-        </>
-      ) : (
-        <></>
-      )}
       <button onClick={handleSubmitForm}>Logout</button>
+      <div className="relative w-[100vw_!important] h-[80vh_!important] overflow-hidden">
+        {myStream ? (
+          <>
+            {/* <h1>{!fullScreenStream ? "My Stream" : "Remote Stream"}</h1> */}
+            <div className="w-full h-full ">
+              {!fullScreenStream ? (
+                <ReactPlayer
+                  key={1}
+                  playing
+                  muted
+                  url={myStream}
+                  width="100%"
+                  height="100%"
+                  className="w-full h-full"
+                />
+              ) : (
+                <ReactPlayer
+                  key={2}
+                  playing
+                  muted
+                  width="100%"
+                  height="100%"
+                  url={remoteStream}
+                  className="w-full h-full"
+                />
+              )}
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
+        {remoteStream ? (
+          <>
+            {/* <h1>{fullScreenStream ? "My Stream" : "Remote Stream"}</h1> */}
+            <div
+              onClick={() => {
+                remoteStream && setFullScreenStream((prev) => !prev);
+              }}
+              className="w-[250px_!important] h-[200px_!important] absolute right-5 bottom-0 "
+            >
+              {!fullScreenStream ? (
+                <ReactPlayer
+                  key={1}
+                  width="100%"
+                  height="100%"
+                  playing
+                  muted
+                  url={remoteStream}
+                />
+              ) : (
+                <ReactPlayer
+                  key={2}
+                  width="100%"
+                  height="100%"
+                  playing
+                  muted
+                  url={myStream}
+                />
+              )}
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 };
