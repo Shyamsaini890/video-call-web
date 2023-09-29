@@ -9,7 +9,7 @@ const RoomPage = () => {
 
   const location = useLocation();
   const { connectedParticipants, room } = location.state;
-  let email = connectedParticipants[connectedParticipants.length - 1];
+  let id = connectedParticipants[connectedParticipants.length - 1];
 
   const socket = useSocket();
   const [remoteSocketId, setRemoteSocketId] = useState(null);
@@ -17,10 +17,17 @@ const RoomPage = () => {
   const [remoteStream, setRemoteStream] = useState();
   const [participants, setParticipants] = useState(connectedParticipants);
 
+  useEffect(() => {
+    participants.length > 1 &&
+      setRemoteSocketId(
+        participants?.filter((participant) => participant !== id)[0]
+      );
+  }, []);
+
   const handleSubmitForm = useCallback(
     (e) => {
       e.preventDefault();
-      socket.emit("room:left", { email, room });
+      socket.emit("room:left", { id, room });
       if (myStream) {
         myStream.getTracks().forEach((track) => {
           track.stop();
@@ -30,12 +37,12 @@ const RoomPage = () => {
       navigate("/");
     },
 
-    [room, socket, myStream, email]
+    [room, socket, myStream, id]
   );
 
   const handleUserJoined = useCallback(({ email, id }) => {
     console.log(`Email ${email} joined room`);
-    setParticipants((prev) => [...prev, email]);
+    setParticipants((prev) => [...prev, id]);
     setRemoteSocketId(id);
   }, []);
 
@@ -156,7 +163,7 @@ const RoomPage = () => {
       <h1 className=" text-3xl font-bold">Room Page</h1>
       {participants.length - 1
         ? participants.map((participant, index) => {
-            if (participant === email) return <></>;
+            if (participant === id) return <></>;
             return (
               <div key={index}>
                 <h1>{participant}</h1>
