@@ -1,7 +1,5 @@
 import React, { createContext, useMemo, useContext } from "react";
-
 import { io } from "socket.io-client";
-
 const SocketContext = createContext(null);
 
 export const useSocket = () => {
@@ -10,7 +8,7 @@ export const useSocket = () => {
 };
 
 export const SocketProvider = (props) => {
-  const socket = useMemo(() => io("http://localhost:8000"), []);
+  const socket = useMemo(() => io("wss://shyam00112.glitch.me"), []);
 
   socket.on("connect_error", (error) => {
     console.error("Socket connection error:", error);
