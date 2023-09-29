@@ -8,7 +8,7 @@ const RoomPage = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  const { connectedParticipants, room } = location.state;
+  const { connectedParticipants, room, myId } = location.state;
   let email = connectedParticipants[connectedParticipants.length - 1];
 
   const socket = useSocket();
@@ -56,7 +56,7 @@ const RoomPage = () => {
     } catch (e) {
       console.log(e);
     }
-  }, [room, socket]);
+  }, [room, socket, remoteSocketId]);
 
   const handleIncommingCall = useCallback(
     async ({ from, offer }) => {
