@@ -172,7 +172,7 @@ const RoomPage = () => {
             );
           })
         : "No one in room"}
-      {myStream ? <button onClick={sendStreams}>Send Stream</button> : <></>}
+      {myStream ? <button onClick={sendStreams}>Accept Call</button> : <></>}
       {remoteSocketId || participants.length - 1 ? (
         <button onClick={handleCallUser}>CALL</button>
       ) : (
