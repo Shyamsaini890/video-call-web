@@ -47,6 +47,7 @@ const RoomPage = () => {
   }, []);
 
   const handlePartcipantLeft = useCallback(({ connectedParticipants }) => {
+    remoteSocketId(null);
     setParticipants(connectedParticipants);
   }, []);
 
