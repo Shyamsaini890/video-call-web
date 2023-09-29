@@ -189,7 +189,7 @@ const RoomPage = () => {
             width="300px"
             url={!fullScreenStream ? myStream : remoteStream}
             onClick={() => {
-              remoteStream && setFullScreenStream((prev) => !prev);
+              remoteStream && setFullScreenStream(!fullScreenStream);
             }}
           />
         </>
@@ -207,7 +207,7 @@ const RoomPage = () => {
             url={fullScreenStream ? myStream : remoteStream}
             className=" max-md:w-100vw[h-w00vh]"
             onClick={() => {
-              remoteStream && setFullScreenStream((prev) => !prev);
+              remoteStream && setFullScreenStream(!fullScreenStream);
             }}
           />
         </>
