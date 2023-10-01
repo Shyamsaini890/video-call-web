@@ -162,49 +162,77 @@ const RoomPage = () => {
 
   return (
     <div className=" flex flex-col justify-center items-center ">
-      <h1 className=" text-3xl font-bold">Room Page</h1>
+      <h1 className=" text-3xl md:text-5xl font-bold bg-[url('https://img.freepik.com/premium-photo/abstract-light-color-crealive-background-ui-ux-design_155807-3675.jpg')] bg-clip-text text-transparent">
+        Room Page
+      </h1>
       {participants.length - 1
         ? participants.map((participant, index) => {
             if (participant === id) return <></>;
             return (
-              <div key={index}>
-                <h1>{participant}</h1>
+              <div
+                className=" my-5 border border-black px-2 rounded-xl"
+                key={index}
+              >
+                <p className=" underline text-center font-semibold ">YOUR ID</p>
+                <h1 className="">{participant}</h1>
               </div>
             );
           })
         : "No one in room"}
-      {myStream ? <button onClick={sendStreams}>Accept Call</button> : <></>}
-      {remoteSocketId || participants.length - 1 ? (
-        <button onClick={handleCallUser}>CALL</button>
+      {myStream ? (
+        <button
+          onClick={sendStreams}
+          className=" px-5 py-1 rounded-xl font-semibold  bg-green-500 "
+        >
+          Accept Call
+        </button>
       ) : (
         <></>
       )}
-      <button onClick={handleSubmitForm}>Logout</button>
-      <div className="relative w-[100vw_!important] h-[80vh_!important] overflow-hidden">
+      {remoteSocketId || participants.length - 1 ? (
+        <button
+          onClick={handleCallUser}
+          className=" font-semibold px-4 py-1 rounded-xl bg-blue-500 my-2"
+        >
+          CALL
+        </button>
+      ) : (
+        <></>
+      )}
+      <button
+        onClick={handleSubmitForm}
+        className=" px-5 py-1 rounded-xl bg-red-500 my-2"
+      >
+        Logout
+      </button>
+      <div className="relative w-[100vw_!important] h-[80vh_!important] overflow-hidden rounded-xl">
         {myStream ? (
           <>
             {/* <h1>{!fullScreenStream ? "My Stream" : "Remote Stream"}</h1> */}
             <div className="w-full h-full ">
               {!fullScreenStream ? (
-                <ReactPlayer
-                  key={1}
-                  playing
-                  muted
-                  url={myStream}
-                  width="100%"
-                  height="100%"
-                  className="w-full h-full"
-                />
+                <>
+                  <ReactPlayer
+                    key={1}
+                    playing
+                    muted
+                    url={myStream}
+                    width="100%"
+                    height="100%"
+                  />
+                </>
               ) : (
-                <ReactPlayer
-                  key={2}
-                  playing
-                  // muted
-                  width="100%"
-                  height="100%"
-                  url={remoteStream}
-                  className="w-full h-full"
-                />
+                <>
+                  <ReactPlayer
+                    key={2}
+                    playing
+                    // muted
+                    width="100%"
+                    height="100%"
+                    url={remoteStream}
+                    className="w-full h-full rounded-xl"
+                  />
+                </>
               )}
             </div>
           </>
@@ -213,31 +241,36 @@ const RoomPage = () => {
         )}
         {remoteStream ? (
           <>
-            {/* <h1>{fullScreenStream ? "My Stream" : "Remote Stream"}</h1> */}
             <div
               onClick={() => {
                 remoteStream && setFullScreenStream((prev) => !prev);
               }}
-              className="w-[250px_!important] h-[200px_!important] absolute right-5 bottom-0 "
+              className="w-[250px_!important] h-[200px_!important] absolute right-5 bottom-0 rounded-full"
             >
               {!fullScreenStream ? (
-                <ReactPlayer
-                  key={1}
-                  width="100%"
-                  height="100%"
-                  playing
-                  // muted
-                  url={remoteStream}
-                />
+                <>
+                  <ReactPlayer
+                    key={1}
+                    width="100%"
+                    height="100%"
+                    playing
+                    // muted
+                    url={remoteStream}
+                    className=" rounded-xl"
+                  />
+                </>
               ) : (
-                <ReactPlayer
-                  key={2}
-                  width="100%"
-                  height="100%"
-                  playing
-                  muted
-                  url={myStream}
-                />
+                <>
+                  <ReactPlayer
+                    key={2}
+                    width="100%"
+                    height="100%"
+                    playing
+                    muted
+                    url={myStream}
+                    className=" rounded-xl"
+                  />
+                </>
               )}
             </div>
           </>
